@@ -1,6 +1,13 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.apolloPlugin)
+}
+
+apollo {
+    service("service") {
+        packageName.set("com.howloz.rickmortyapp")
+    }
 }
 
 android {
@@ -40,7 +47,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
     packaging {
         resources {
@@ -66,4 +73,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // view model compose
+    implementation(libs.androidx.lifecycle.compose.viewmodel)
+    implementation(libs.androidx.lifecycle.compose.runtime)
+
+    // dagger hilt
+    implementation(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+
+    // apollo graphql
+    implementation(libs.apollo.runtime)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 }
