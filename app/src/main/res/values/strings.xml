@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">RickmortyApp</string>
+    <string name="hello_world">Hello Rick</string>
+    <string name="menu">Menu</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favourite</string>
+    <string name="profile">Profile</string>
+    <string name="comming_soon">Comming Soon</string>
+    <string name="subscribe_question">Subscribe Question</string>
+    <string name="subscribed_info">subscribed info</string>
 </resources>

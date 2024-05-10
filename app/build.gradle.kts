@@ -1,8 +1,16 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.jetbrainsKotlinKapt)
     alias(libs.plugins.apolloPlugin)
+//    alias(libs.plugins.daggerHiltPlugin)
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
+
+kapt {
+    correctErrorTypes=true
+}
+
 
 apollo {
     service("service") {
@@ -51,13 +59,14 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/**/*"
         }
     }
 }
 
 dependencies {
 
+    implementation(project(":core"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -86,4 +95,7 @@ dependencies {
     implementation(libs.apollo.runtime)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+    implementation (libs.apollo.coroutines.support)
+
+
 }
