@@ -3,8 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.jetbrainsKotlinKapt)
     alias(libs.plugins.apolloPlugin)
-//    alias(libs.plugins.daggerHiltPlugin)
-    id("com.google.dagger.hilt.android") version "2.44" apply false
+    id("com.google.dagger.hilt.android")
 }
 
 kapt {
@@ -33,6 +32,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -64,6 +64,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(project(":core"))
@@ -83,19 +84,34 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
     // view model compose
     implementation(libs.androidx.lifecycle.compose.viewmodel)
     implementation(libs.androidx.lifecycle.compose.runtime)
 
+
+    // apollo graphql
+    implementation(libs.apollo.runtime)
+    implementation (libs.apollo.coroutines.support)
+
+    // coil image library
+    implementation(libs.coil.compose)
+
     // dagger hilt
-    implementation(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.hilt.android)
 
     // apollo graphql
     implementation(libs.apollo.runtime)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
     implementation (libs.apollo.coroutines.support)
+
+
+    // navigation compose
+    implementation(libs.androidx.navigation.compose)
+
+
+    kapt ("androidx.hilt:hilt-compiler:1.0.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 
 }

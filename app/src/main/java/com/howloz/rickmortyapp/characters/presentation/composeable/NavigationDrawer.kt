@@ -1,4 +1,4 @@
-package com.howloz.rickmortyapp.characters.presentation.ui.composeable
+package com.howloz.rickmortyapp.characters.presentation.composeable
 
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -45,12 +45,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.howloz.rickmortyapp.R
-import com.howloz.rickmortyapp.characters.presentation.ui.theme.RickmortyAppTheme
+import com.howloz.rickmortyapp.characters.presentation.theme.RickmortyAppTheme
 import kotlinx.coroutines.launch
 
 data class MenuItem(val title: String, val icon: ImageVector)
 @Composable
-fun NavigationDrawer() {
+fun NavigationDrawer(content: Unit) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -125,16 +125,10 @@ fun NavigationDrawer() {
                             },
                             modifier = Modifier.padding(horizontal=12.dp))
                     }
-//                    Text(stringResource(id = R.string.hello_world))
                 }
 
             }, content = {
-                Box(modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                    contentAlignment = Alignment.Center){
-                    Text(text = stringResource(id = R.string.hello_world))
-                }
+                content
             })
 
 
@@ -192,6 +186,6 @@ fun MyTopAppBar(onMenuClick : () -> Unit) {
 @Composable
 private fun NavigationDrawerPreview() {
     RickmortyAppTheme {
-        NavigationDrawer()
+//        NavigationDrawer()
     }
 }

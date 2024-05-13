@@ -1,4 +1,4 @@
-package com.howloz.rickmortyapp.characters.presentation.ui.theme
+package com.howloz.rickmortyapp.characters.presentation.theme
 
 import android.app.Activity
 import android.os.Build

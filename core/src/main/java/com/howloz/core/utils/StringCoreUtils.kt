@@ -1,4 +1,4 @@
-package com.howloz.core.utils.di
+package com.howloz.core.utils
 
 object StringCoreUtils {
 

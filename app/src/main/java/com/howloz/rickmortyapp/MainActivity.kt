@@ -3,49 +3,53 @@ package com.howloz.rickmortyapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.activity.viewModels
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.howloz.core.utils.di.StringCoreUtils
-import com.howloz.rickmortyapp.characters.presentation.ui.composeable.NavigationDrawer
-import com.howloz.rickmortyapp.characters.presentation.ui.theme.RickmortyAppTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.howloz.core.utils.Route
+import com.howloz.rickmortyapp.characters.presentation.character.CharacterScreen
+import com.howloz.rickmortyapp.characters.presentation.character.CharacterViewModel
+import com.howloz.rickmortyapp.characters.presentation.characters.CharactersScreen
+import com.howloz.rickmortyapp.characters.presentation.theme.RickmortyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             RickmortyAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                val navController = rememberNavController()
 
-                    NavigationDrawer()
+                NavHost(navController, startDestination = Route.characterList){
+                    composable(Route.characterList){
+                        CharactersScreen(
+                            onCharacterClick = {id->
+                                navController.navigate(
+                                    Route.character
+                                        .replace("{id}",id)
+                                )
+                            }
+                        )
+                    }
+
+                    composable(Route.character){
+                        CharacterScreen(
+                            navigateBack = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
                 }
+
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RickmortyAppTheme {
-        Greeting("Android")
-    }
-}

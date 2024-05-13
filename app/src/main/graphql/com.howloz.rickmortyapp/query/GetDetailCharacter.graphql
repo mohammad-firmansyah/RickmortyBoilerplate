@@ -1,0 +1,8 @@
+query GetDetailCharacter($id: ID!){
+    character(id:$id) {
+        id
+        name
+        status
+        image
+    }
+}
